@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Sport Session</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <%-include('header')%>
+    <h1 class="text-3xl font-bold text-center mt-10">Create Sport Session</h1>
+    <div class="create-session flex justify-center mt-6">
+        <form action="/create-session/<%=sportId%>" method="POST" class="bg-white rounded-lg shadow-md p-8 max-w-lg">
+            <input type="hidden" name="_csrf" value="<%= csrfToken%>">
+            <label for="name" class="block text-gray-700 font-bold mb-2">Name:</label>
+            <input type="text" name="name" id="name" required
+                class="appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <label for="players" class="block text-gray-700 font-bold mb-2">Players (CSV):</label>
+            <input type="text" name="players" id="players" required
+                class="appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            
+            <label for="playersHave" class="block text-gray-700 font-bold mb-2">Players Have:</label>
+            <input type="number" name="playersHave" id="playersHave" required
+                class="appearance-none border rounded-md w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline">
+
+            <label for="playersNeeded" class="block text-gray-700 font-bold mb-2">Players Needed:</label>
+            <input type="number" name="playersNeeded" id="playersNeeded" required
+                class="appearance-none border rounded-md w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline">
+
+            <label for="startTime" class="block text-gray-700 font-bold mb-2">Start Time:</label>
+            <input type="time" name="startTime" id="startTime" required pattern="[0-9]{2}:[0-9]{2}"
+            class="appearance-none border rounded-md w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" >
+
+
+            <label for="venue" class="block text-gray-700 font-bold mb-2">Venue:</label>
+            <input type="text" name="venue" id="venue" required
+                class="appearance-none border rounded-md w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline">
+
+            <label for="date" class="block text-gray-700 font-bold mb-2">Date:</label>
+            <input type="date" name="date" id="date" required
+                class="appearance-none border rounded-md w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline">
+
+            <button type="submit"
+                class="bg-gradient-to-r from-purple-500 to-pink-500 text-white active:bg-gray-700 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none">
+                Create Session
+            </button>
+        </form>
+    </div>
+</body>
+
+</html>
+

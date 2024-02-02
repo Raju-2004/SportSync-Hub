@@ -1,0 +1,79 @@
+
+<header class="bg-gradient-to-r from-purple-500 to-pink-500 py-4">
+  <nav class="container mx-auto px-6 py-4">
+    <div class="flex items-center justify-between">
+      <div class="text-xl font-bold text-white">Sports Scheduler</div>
+      <ul class="flex space-x-20">
+        <li><a href="/" class="text-white hover:underline">Home</a></li>
+        <li><a href="/sports" class="text-white hover:underline">Sports</a></li>
+        <li>
+          <a href="/sessions" class="text-white hover:underline">Sessions</a>
+        </li>
+        <% if (user != null) { %>
+        <li class="relative">
+          <div class="flex items-center">
+            <div class="h-10 w-10 rounded-full bg-white overflow-hidden">
+              <!-- Add user profile image here -->
+              <img src="./assets/default.jpg" alt="User Profile Image" />
+            </div>
+            <svg
+              class="h-6 w-6 text-white ml-2 cursor-pointer"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              id="dropdown-toggle"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 12a2 2 0 100-4 2 2 0 000 4zM3 10a7 7 0 1114 0 7 7 0 01-14 0z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </div>
+          <!-- Dropdown menu -->
+          <div
+            class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden"
+            id="dropdown-menu"
+          >
+            <div class="py-1">
+              <a
+                href="/created-sessions"
+                class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                >Created Sessions</a
+              >
+              <a
+                href="/joinedSessions"
+                class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                >Joined Sessions</a
+              >
+              <a
+                href="/signout"
+                class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                >Signout</a
+              >
+            </div>
+          </div>
+        </li>
+        <% } %>
+      </ul>
+    </div>
+  </nav>
+</header>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const dropdownToggle = document.querySelector('#dropdown-toggle');
+    const dropdownMenu = document.querySelector('#dropdown-menu');
+
+    dropdownToggle.addEventListener('click', function(event) {
+      event.stopPropagation(); // Prevent event bubbling
+      dropdownMenu.classList.toggle('hidden');
+    });
+
+    // Close dropdown menu if clicked outside
+    document.addEventListener('click', function(event) {
+      if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
+        dropdownMenu.classList.add('hidden');
+      }
+    });
+  });
+</script>
+
