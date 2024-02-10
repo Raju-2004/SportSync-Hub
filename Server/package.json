@@ -2,10 +2,10 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "start": "nodemon -e js,ejs",
-    "start:prod":"node server.js",
+    "start:prod":"node index.js",
     "pretest": "SET NODE_ENV=test&& npx sequelize-cli db:drop && SET NODE_ENV=test&& npx sequelize-cli db:create",
     "test": "jest --detectOpenHandles",
     "prepare": "husky install"
