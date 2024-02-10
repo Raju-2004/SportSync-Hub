@@ -336,7 +336,7 @@ app.post("/cancelSession/:id", async (req, res) => {
     if (!session) {
       throw new Error("Session not found.");
     }
-    session.cancellation_reason = "session postponed"
+    session.cancellation_reason = req.body.reason
     session.cancellation_status = true;
     await session.save();
     console.log(session);

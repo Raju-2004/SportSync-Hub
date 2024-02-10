@@ -16,6 +16,8 @@
   </head>
   <body class="bg-gray-200">
     <%-include('header', { user: user }) %>
+    <h1><%= console.log(user) %></h1>
+    <% if(user.isAdmin) { %>
     <form
       action="/sports"
       method="post"
@@ -40,6 +42,7 @@
         Create Sport
       </button>
     </form>
+    <%}%>
     <div class="sports mt-16 grid grid-cols-3 gap-4">
       <% for(let i = 0; i < sports.length; i++) { %>
       <div

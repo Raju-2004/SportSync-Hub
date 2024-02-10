@@ -39,9 +39,11 @@
   </head>
   <body class="bg-gray-100">
     <%-include('header')%>
-    
+
     <div class="container mx-auto p-4">
-      <h2 class="text-2xl font-bold text-transform: capitalize;"><%= title %></h2>
+      <h2 class="text-2xl font-bold text-transform: capitalize;">
+        <%= title %>
+      </h2>
       <div class="sessions">
         <% for(let i = 0; i < sessions.length; i++) { %>
         <div class="session bg-white p-4 rounded-lg shadow-md mb-4">
@@ -132,40 +134,72 @@
               Venue : <%=sessions[i].venue%>
             </li>
           </ul>
-          
+
           <% if(!sessions[i].cancellation_status) {%>
-            <div class="flex justify-start gap-6 mt-4">
-              <form action="/join-session/<%= sessions[i].id%>" method="post">
-                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                <button
-                  class="bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600" type="submit"
-                >
-                Join session
-                </button>
-              </form>
-              <form action="/cancelSession/<%= sessions[i].id%>" method="post">
-                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                <button
-                  class="bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600" type="submit"
-                >
-                Cancel session
-                </button>
-              </form>
-            </div>
-            
-          <%}else{%>
-            <form action="/cancelSession/<%= sessions[i].id%>" method="post">
-              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <div class="flex justify-start gap-6 mt-4">
+            <form action="/join-session/<%= sessions[i].id%>" method="post">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
               <button
-                class=" cursor-not-allowed bg-indigo-500 mt-4 text-white py-2 px-4 rounded-lg hover:bg-indigo-600" type="submit"
+                class="bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600"
+                type="submit"
               >
-              Session Cancelled
+                Join session
               </button>
             </form>
+            <button
+              onclick="toggleForm('cancelForm<%= sessions[i].id %>')"
+              class="bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600"
+              type="submit"
+            >
+              Cancel session
+            </button>
+          </div>
+          <form
+            id="cancelForm<%= sessions[i].id %>"
+            action="/cancelSession/<%= sessions[i].id %>"
+            method="post"
+            class="hidden"
+          >
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            <div>
+              <label for="reason" class="block text-gray-700 font-bold mb-2"
+                >Cancellation Reason:</label
+              >
+              <input
+                type="text"
+                id="reason"
+                name="reason"
+                class="appearance-none block w-full bg-gray-200 border border-gray-200 rounded-md py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              />
+            </div>
+            <button
+              type="submit"
+              class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 mt-4"
+            >
+              Confirm Cancellation
+            </button>
+          </form>
+
+          <%}else{%>
+          <form action="/cancelSession/<%= sessions[i].id%>" method="post">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            <button
+              class="cursor-not-allowed bg-indigo-500 mt-4 text-white py-2 px-4 rounded-lg hover:bg-indigo-600"
+              type="submit"
+            >
+              Session Cancelled
+            </button>
+          </form>
           <%}%>
         </div>
         <% } %>
       </div>
     </div>
+    <script>
+      function toggleForm(formId) {
+        const form = document.getElementById(formId);
+        form.classList.toggle("hidden");
+      }
+    </script>
   </body>
 </html>

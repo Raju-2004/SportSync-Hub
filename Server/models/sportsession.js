@@ -30,8 +30,8 @@ module.exports = (sequelize, DataTypes) => {
     startTime: DataTypes.TIME,
     venue: DataTypes.STRING,
     date : DataTypes.DATE,
-    cancellation_status : DataTypes.BOOLEAN,
-    cancellation_reason : DataTypes.STRING
+    cancellation_status :{type : DataTypes.BOOLEAN,defaultValue:false},
+    cancellation_reason :{type :  DataTypes.STRING,allowNull:false}
   }, {
     sequelize,
     modelName: 'sportSession',
